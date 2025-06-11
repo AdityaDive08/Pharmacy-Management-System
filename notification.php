@@ -1,0 +1,122 @@
+<html>
+<head>
+<link rel="stylesheet" href="order.css?v=2">
+<link rel="stylesheet" href="pro.css?v=2">
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+<div class="outergrid">
+<selection class="sidebar">
+	
+	<div class="anchor1" style="display: flex; height: 48px; width: 150px; padding-left: 25px; padding-top: 10px;"> 
+		<i class='bx bxs-home-smile'></i>
+		<span class="text">AdminHub</span>
+	</div>
+	<br>
+	<ul class="onclick">
+		<li><a href="#">
+			<i class='bx bxs-dashboard' ></i>
+			<span class="text">DashBoard</span>
+		</a></li>
+		
+		<li><a href="add.php">
+			<i class='bx bxs-add-to-queue'></i>
+			<span class="text">Add Products</span>
+		</a></li>
+		<li><a href="list.php">
+			<i class='bx bx-list-ul' ></i>
+			<span class="text">List Of Products</span>
+		</a></li>
+		<li><a href="history.php">
+			<i class='bx bxs-store'></i>
+			<span class="text">History</span>
+		</a></li>
+	</ul>
+	
+	<ul >
+		<li class="ofclick"><a href="#">
+			<i class='bx bx-cog' ></i>
+			<span class="text">Settings</span>
+		</a></li>
+			
+		<li><a href="login.php">
+			<div class="out"><i class='bx bx-log-out-circle' style="color:red"></i><div>
+			<span class="logout">Log Out</span>
+		</a></li>
+	</ul>
+</selection>
+
+<selection class="main" style="width:1068px">
+	<nav>
+	<div class="icon"><i class='bx bx-list-ol'></i></div>
+	<a class="cat">Categories</a>
+	<input type="search" value="search" class="search">
+	<div class="search-icon"><i class='bx bx-search-alt-2'></i></div>
+	<?php
+		$servername="localhost";
+		$username="root";
+		$password="";
+		$database="products";
+		$conn = mysqli_connect($servername,$username,$password,$database);
+		$select_query=mysqli_query($conn,"SELECT * from `notify`");
+		$row_count=mysqli_num_rows($select_query);
+	?>
+	<div class="notify" >
+			<div class="bell"><i class='bx bxs-bell'></i></bell>
+			<span class="num" style="display:flex; width:20px;left:15px;top:-16px; align-items:center; justify-content:center"><?php echo $row_count;?></span>
+	</div>
+	</nav>
+<div class="allot">
+		<h3>Dashboard</h3>
+			<div class="greater"><i class="bx bx-chevron-right"></i></div>
+		<a href="#" class="home">Home</a>
+
+</div>
+<div class="list">
+			<table>
+			<tr>
+				<th>Sr.no</th>
+				<th>Product Name</th>
+				<th>Product Image</th>
+				<th>Product Description</th>
+				<th>Product Price</th>
+				<th>Deploy</th>
+				<th>Delete</th>
+			</tr>
+	
+			<tr>
+	
+	
+<?php
+	include"product.php";
+	$select_q="Select * from cart";
+	$result_q=mysqli_query($conn,$select_q);
+	while($row=mysqli_fetch_assoc($result_q)){
+?>
+	
+	<td><?php echo $row['sr']; ?></td>
+	<td><?php echo $row['pname']; ?></td>
+	<td><?php echo $row['image']; ?></td>
+	<td><?php echo $row['description']; ?></td>
+	<td><?php echo $row['price']; ?></td>
+	<td><a href="history.php" class="deploy">deploy</a></td>
+	<td><a href="added.php" class="delete">cancle</a></td>
+
+	</tr>
+<?php
+	
+}
+?>
+
+
+</div>
+
+</div>
+
+</table></div>
+</selection>
+</body>
+</html>
+
+
